@@ -1,34 +1,39 @@
-menu_list_array = ["Pizza Margarita Vegetariana",
-                        "Pizza de Pollo Tandoori",
-                        "Pizza Suprema Vegetariana",
-                        "Pizza de Paneer Tikka",
-                        "Pizza Vegetariana de Lujo",
-                        "Pizza Extravaganza Vegetariana"];
-    
-    function getmenu(){
-        var htmldata="";
-        menu_list_array.sort();
-        for(var i=0;i<menu_list_array.length;i++){
-            htmldata=htmldata+ menu_list_array[i] + '<br>'
-        }
-        document.getElementById("display_menu").innerHTML = htmldata;
-       
-    }
+WebCam.set({
+width:350,
+height:300,
+Image_format:'png',
+png_quality:90
+});
 
-    function add_item(){
-        var htmldata;
-		var imgtags='<img id="im1" src="pizzaImg.png">'
-        var item=document.getElementById("add_item").value;
-         htmldata="menu_list_array.sort()";
-        for(var i=0;i<menu_list_array.length;i++){
-            htmldata=htmldata+imgtags+ menu_list_array[i]+'<br>';
-        }
-         document.getElementById("display_addedmenu").innerHTML = htmldata;
-		
-    }
 
-function add_top(){
-	var item=document.getElementById("add_item").value;
-    menu_list_array.push(item);
-	add_item();
+camera=document.getElementById ("camera");
+
+
+WebCam.attach('#camera');
+function take_snapshot(){
+WebCam.snap(function(data_uri){
+    document.getElementById("result").innerHTML='<img id="captured_image" src="'+data_uri+'"/>';
+}
+)
+};
+
+console.log('ml5 version:',ml5.version);
+classifier= ml5.imageClasifier('https://teachablemachine.withgoogle.com/models/v_sl95BzE/model.json'.modelLoaded);
+function modelLoaded(){
+    console.log('modelo cargado');
+}
+function check(){
+    img=document.getElementById ("captured_image");
+classifier.classify(img, gotResult);
+}
+function gotResult(error,results){
+if(error){
+console.error(error);
+}else{
+console.log(results);
+document.getElementById("result_object_name").innerHTML=results[0].label;
+
+document.getElementById("result_object_accuracy").innerHTML=results[0].confidence.toFixed(3);
+
+}
 }

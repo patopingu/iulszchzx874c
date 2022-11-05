@@ -1,50 +1,55 @@
-<html><head>
-    <title>Pizzería</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+<html>
+  <head>
+    <title>Reconocimiento de imagen</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
-<script src="main.js"></script>
-</head>
+<script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.js"></script>
 
-<body>
-    <div class="topnav">
-        <a class="active" href="#">Pizzería</a>
-        <div class="topnav-right">
-         <a href="#viewblock">Ver Menú</a>
-         <a href="#addTopings">Sugerir ingredientes</a>
-        </div>
-    </div>
+   <link rel="stylesheet" href="style.css">
+  
+  </head>
 
-    <div class="row" id="viewblock">
-        <div class="img_div"> 
-            <img class="img-responsive" src="pizza.png">
-        </div>
-        <div class="menu_div">
-            <button id="menu_list" onclick="getmenu()">Ver Menú</button>
-           <div id="display_menu"></div>
-        </div>
-    </div>
+  <body>
+  <div class="container">
     
-    <div class="newRow" id="addTopings">
-        <div class="block1">
-            <input id="add_item" placeholder="Escribe los ingredientes"> <br><br>
-			<button class= "btn btn-success" onclick="add_top()">Añadir sugerencia</button><br><br>
-            <button id="add_toppings" onclick="add_item()">Ver Pizza</button>
-        </div>
-		
-        <div class="block2">
-            <div id="display_addedmenu">
-            </div>
-        </div>
+    <center>
+<h3 class="btn btn-default heading">Reconocimiento DE IMAGEN</h3>
+      <br><br>
+
+      <p style="font-size: 22px;">El modelo está entrenado para identificar los siguientes objetos: </p>
+      <b class="name_of_objets">
+        reloj
+        <hr>
+        cuchara
         
-    </div>
+        <hr>
+      cel
+      <hr>
+      </b>
+      <label>Vista de la cámara: </label>
+<div id="camera"></div>
+      <br><br>
+      <div id="result">
+      </div>
+      <br><br>
+      <button onclick="take_snapshot();" class="btn btn-info">capturar img</button>
+      <br><br>
+      <button onclick="check();" class="btn btn-success">identificar img</button>
+      
+      <br><br>
 
-    <div>
-        <img class="img-responsive" src="topping.png">
-    </div>
+      <p style="font-size: 22px;">Objeto: <span id="result_objet_name"></span>  </p>
+      <p style="font-size: 22px;">Precisión: <span id="result_objet_accuracy"></span>  </p>
+    </center>
 
+  </div>
+<script src="main.js"></script>
 
-</body></html>
+  </body>
+</html>
+
+ 
